@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.skilldistillery.filmquery.entities.Actor;
@@ -185,13 +186,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					String lastName = findActorResult.getString(3);
 					Actor actor = new Actor(actorId, firstName, lastName);
 					actors.add(actor);
+					film = new Film(id, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating,
+							features, actors);
 			}
 				findActorResult.close();
 				stmt2.close();
 				conn2.close();
 				
-				film = new Film(id, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating,
-						features, actors);
 				films.add(film);
 			}
 			filmResult.close();
