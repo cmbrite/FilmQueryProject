@@ -1,5 +1,7 @@
 package com.skilldistillery.filmquery.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Film {
@@ -7,16 +9,18 @@ public class Film {
 	private String title;
 	private String description;
 	private int release_year;
-	private int language_id;
+	private String language_id;
 	private int rental_duration;
 	private double rental_rate;
 	private int length;
 	private double replacement_cost;
 	private String rating;
 	private String special_features;
+	private List<Actor> actors = new ArrayList<>();
 
-	public Film(int id, String title, String description, int release_year, int language_id, int rental_duration,
-			double rental_rate, int length, double replacement_cost, String rating, String special_features) {
+	public Film(int id, String title, String description, int release_year, String language_id, int rental_duration,
+			double rental_rate, int length, double replacement_cost, String rating, String special_features,
+			List<Actor> actors) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -29,7 +33,19 @@ public class Film {
 		this.replacement_cost = replacement_cost;
 		this.rating = rating;
 		this.special_features = special_features;
+		this.actors = actors;
 	}
+
+
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
+	}
+
 
 	public int getId() {
 		return id;
@@ -63,11 +79,11 @@ public class Film {
 		this.release_year = release_year;
 	}
 
-	public int getLanguage_id() {
+	public String getLanguage_id() {
 		return language_id;
 	}
 
-	public void setLanguage_id(int language_id) {
+	public void setLanguage_id(String language_id) {
 		this.language_id = language_id;
 	}
 
@@ -121,12 +137,11 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", release_year=" + release_year
-				+ ", language_id=" + language_id + ", rental_duration=" + rental_duration + ", rental_rate="
-				+ rental_rate + ", length=" + length + ", replacement_cost=" + replacement_cost + ", rating=" + rating
-				+ ", special_features=" + special_features + "]";
+		return "Film ID: " + id + ", Title: " + title + ", Year: " + release_year + ", Language: " + language_id +
+				", Rating: " + rating + ", Description: " + description + "\n";
 	}
-
+//	 +  ", \n Actors: " + actors + "\n\n"
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, id, language_id, length, rating, release_year, rental_duration, rental_rate,
