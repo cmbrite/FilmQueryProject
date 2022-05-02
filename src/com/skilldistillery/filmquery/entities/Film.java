@@ -36,16 +36,13 @@ public class Film {
 		this.actors = actors;
 	}
 
-
 	public List<Actor> getActors() {
 		return actors;
 	}
 
-
 	public void setActors(List<Actor> actors) {
 		this.actors = actors;
 	}
-
 
 	public int getId() {
 		return id;
@@ -137,11 +134,11 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film ID: " + id + ", Title: " + title + ", Year: " + release_year + ", Language: " + language_id +
-				", Rating: " + rating + ", Description: " + description + "\n"+  ", Actors: " + actors + "\n\n";
+		return "Film ID: " + id + ", Title: " + title + ", Year: " + release_year + ", Language: " + language_id
+				+ ", Rating: " + rating + ", Description: " + description + "\n" + ", Actors: " + actors + "\n\n";
 	}
 //	 +  ", \n Actors: " + actors + "\n\n"
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, id, language_id, length, rating, release_year, rental_duration, rental_rate,
@@ -164,7 +161,5 @@ public class Film {
 				&& Double.doubleToLongBits(replacement_cost) == Double.doubleToLongBits(other.replacement_cost)
 				&& Objects.equals(special_features, other.special_features) && Objects.equals(title, other.title);
 	}
-	
-	
 
 }

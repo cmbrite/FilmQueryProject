@@ -35,8 +35,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			String sql = "SELECT film.id, title, description, release_year, "
 					+ "language.name \"Language\", rental_duration, rental_rate, length, "
 					+ "replacement_cost, rating, special_features\n"
-					+ "From film JOIN language ON film.language_id = language.id\n"
-					+ "WHERE film.id = ?";
+					+ "From film JOIN language ON film.language_id = language.id\n" + "WHERE film.id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, filmId);
 			ResultSet filmResult = stmt.executeQuery();
@@ -52,18 +51,11 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				double repCost = filmResult.getDouble(9);
 				String rating = filmResult.getString(10);
 				String features = filmResult.getString(11);
-//				int actorId = filmResult.getInt(12);
-//				String firstName = filmResult.getString(13);
-//				String lastName = filmResult.getString(14);
-//				Actor actor = new Actor(actorId, firstName, lastName);
-//				actors.add(actor);
 
-				
 				Connection conn2 = DriverManager.getConnection(URL, user, pass);
 				String sql2 = "SELECT actor.id \"Actor ID\", first_name, last_name\n"
 						+ "FROM actor JOIN film_actor ON actor.id = film_actor.actor_id\n"
-						+ "JOIN film ON film_actor.film_id = film.id\n"
-						+ "WHERE film.id = ?";
+						+ "JOIN film ON film_actor.film_id = film.id\n" + "WHERE film.id = ?";
 				PreparedStatement stmt2 = conn2.prepareStatement(sql2);
 				stmt2.setInt(1, filmId);
 				ResultSet findActorResult = stmt2.executeQuery();
@@ -73,10 +65,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					String lastName = findActorResult.getString(3);
 					Actor actor = new Actor(actorId, firstName, lastName);
 					actors.add(actor);
-		
-			}
-				film = new Film(id, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating,
-						features, actors);
+
+				}
+				film = new Film(id, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating, features,
+						actors);
 			}
 			filmResult.close();
 			stmt.close();
@@ -140,19 +132,17 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		return actors;
 	}
-	
+
 	@Override
 	public List<Film> findFilmBySearch(String search) {
 		Film film = null;
 		List<Film> films = new ArrayList<>();
-		List<Actor> actors = new ArrayList<>();
 		int id;
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
-			String sql = "SELECT film.id, title, description, release_year, "
-					+ "language.name \"Language\", rental_duration, rental_rate, "
-					+ "length, replacement_cost, rating, special_features "
-					+ "From film JOIN language ON film.language_id = language.id "
+			String sql = "SELECT film.id, title, description, release_year, language.name \"Language\", rental_duration, rental_rate, length, replacement_cost, rating,\n"
+					+ "special_features\n"
+					+ "From film JOIN language ON film.language_id = language.id\n"
 					+ "WHERE title LIKE ? OR description LIKE ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, "%" + search + "%");
@@ -170,35 +160,35 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				double repCost = filmResult.getDouble(9);
 				String rating = filmResult.getString(10);
 				String features = filmResult.getString(11);
-			
 				
 				Connection conn2 = DriverManager.getConnection(URL, user, pass);
 				String sql2 = "SELECT actor.id \"Actor ID\", first_name, last_name\n"
 						+ "FROM actor JOIN film_actor ON actor.id = film_actor.actor_id\n"
-						+ "JOIN film ON film_actor.film_id = film.id\n"
-						+ "WHERE film.id = ?";
+						+ "JOIN film ON film_actor.film_id = film.id\n" + "WHERE film.id = ?";
 				PreparedStatement stmt2 = conn2.prepareStatement(sql2);
 				stmt2.setInt(1, id);
 				ResultSet findActorResult = stmt2.executeQuery();
+				List<Actor> actors = new ArrayList<>();
 				while (findActorResult.next()) {
 					int actorId = findActorResult.getInt(1);
 					String firstName = findActorResult.getString(2);
 					String lastName = findActorResult.getString(3);
 					Actor actor = new Actor(actorId, firstName, lastName);
 					actors.add(actor);
-					film = new Film(id, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating,
-							features, actors);
-			}
-				findActorResult.close();
-				stmt2.close();
-				conn2.close();
+
+				}
 				
+				film = new Film(id, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating, features,
+						actors);
+
 				films.add(film);
 			}
 			filmResult.close();
 			stmt.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (
+
+		SQLException e) {
 			e.printStackTrace();
 		}
 

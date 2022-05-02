@@ -75,6 +75,7 @@ public class FilmQueryApp {
 			if (choice == 3) {
 				System.out.println("Good bye!");
 			} 
+			
 		} while (choice != 3);
 	}
 
@@ -84,5 +85,10 @@ public class FilmQueryApp {
 		System.out.println("2. Look up a film by a search keyword.");
 		System.out.println("3. Exit the application.");
 	}
+	
+//	private void subMenu() {
+//		System.out.println("1. Return to the main menu.");
+//		System.out.println("2. View all film details.");
+//	}
 
 }
