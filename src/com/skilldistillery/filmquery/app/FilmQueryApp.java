@@ -38,7 +38,7 @@ public class FilmQueryApp {
 	}
 
 	private void startUserInterface(Scanner input) {
-		
+
 		int choice;
 		do {
 			userMenu();
@@ -59,6 +59,14 @@ public class FilmQueryApp {
 					film = db.findFilmById(filmId);
 				}
 				System.out.println(film);
+				subMenu();
+				int menuChoice = input.nextInt();
+				if (menuChoice == 1) {
+					continue;
+				} else if (menuChoice == 2) {
+					String n = null;
+					System.out.println(film.toString2(n)+ "\n");
+				}
 			}
 			if (choice == 2) {
 				System.out.println("Please enter a search keyword: ");
@@ -71,11 +79,21 @@ public class FilmQueryApp {
 					films = db.findFilmBySearch(keyword);
 				}
 				System.out.println(films);
+				subMenu();
+				int menuChoice = input.nextInt();
+				if (menuChoice == 1) {
+					continue;
+				} else if (menuChoice == 2) {
+					String n = null;
+					for(int i = 0; i < films.size(); i++) {
+						System.out.println(films.get(i).toString2(n) + "\n");
+					}
+				}
 			}
 			if (choice == 3) {
 				System.out.println("Good bye!");
-			} 
-			
+			}
+
 		} while (choice != 3);
 	}
 
@@ -85,10 +103,10 @@ public class FilmQueryApp {
 		System.out.println("2. Look up a film by a search keyword.");
 		System.out.println("3. Exit the application.");
 	}
-	
-//	private void subMenu() {
-//		System.out.println("1. Return to the main menu.");
-//		System.out.println("2. View all film details.");
-//	}
+
+	private void subMenu() {
+		System.out.println("1. Return to the main menu.");
+		System.out.println("2. View all film details.");
+	}
 
 }

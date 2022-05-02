@@ -137,12 +137,19 @@ public class Film {
 		return "Title: " + title + ", Year: " + release_year + ", Language: " + language_id
 				+ ", Rating: " + rating + ", Description: " + description + "\n" + "Actors: " + actors + "\n\n";
 	}
-//	 +  ", \n Actors: " + actors + "\n\n"
+
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, id, language_id, length, rating, release_year, rental_duration, rental_rate,
 				replacement_cost, special_features, title);
+	}
+
+	public String toString2(String n) {
+		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", release_year=" + release_year
+				+ ", language_id=" + language_id + ", rental_duration=" + rental_duration + ", rental_rate="
+				+ rental_rate + ", length=" + length + ", replacement_cost=" + replacement_cost + ", rating=" + rating
+				+ ", special_features=" + special_features + ", actors=" + actors + "]";
 	}
 
 	@Override

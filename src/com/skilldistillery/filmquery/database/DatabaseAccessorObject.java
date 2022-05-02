@@ -186,7 +186,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.close();
 			conn.close();
 		} catch (
-
 		SQLException e) {
 			e.printStackTrace();
 		}
